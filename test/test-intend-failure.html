@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Head Import Test</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+
+<body>
+    <img data-src="https://upload.wikimedia.org/wikipedia/commons/a/af/Villainc.svg" is="lazy-img" />
+    <script src='../lazy-img.js'></script>
+    <script>
+        const test_list = document.createElement("ol");
+        document.body.appendChild(test_list);
+        function run_test(test) {
+            const test_list_li = document.createElement("li");
+            const test_span = document.createElement("span");
+            const error_span = document.createElement("span");
+            const conclusion_span = document.createElement("span");
+            test_list_li.append(test_span, error_span, conclusion_span);
+
+            test_span.appendChild(document.createTextNode(test.label));
+            let resulting_error;
+            try {
+                lazy_img.init({ lazy_src: test.data[0], loading_src: test.data[1] }, test.data[2]);
+                resulting_error = null;
+            } catch (error) {
+                resulting_error = error;
+            }
+            error_span.appendChild(document.createTextNode(` : "${(resulting_error != null) ? resulting_error : "No errors"}" => `))
+
+            conclusion_span.appendChild(
+                document.createTextNode(
+                    test.expect_error === true
+                        ? (resulting_error != null) ? "Task failed successfully!" : "Task failed unsuccessfully!"
+                        : (resulting_error == null) ? "Task succeeded successfully!" : "Task succeeded unsuccessfully!"
+
+                )
+            )
+
+            test_list.appendChild(test_list_li);
+        }
+
+        [
+            {
+                label: "No lazy image source",
+                data: [undefined, undefined, undefined],
+                expect_error: true
+            },
+            {
+                label: "No loading image source",
+                data: ["bananas", undefined, undefined],
+                expect_error: true
+            },
+            {
+                label: "Should work",
+                data: ["bananas", "chungus", undefined],
+                expect_error: false
+            },
+            {
+                label: "Duplicate lazy image tag definition",
+                data: ["bananas", "chungus", undefined],
+                expect_error: true
+            }
+
+        ].forEach(run_test);
+
+
+    </script>
+</body>
+
+</html>
