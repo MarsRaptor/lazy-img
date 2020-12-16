@@ -1,0 +1,23 @@
+{
+  "name": "@marsraptor/lazy-img",
+  "version": "1.0.0",
+  "description": "Lazy loading <img/> elements",
+  "main": "lazy-img.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarsRaptor/lazy-img.git"
+  },
+  "author": "MarsRaptor <waltongregory.hobby@gmail.com> (https://twitter.com/MarsRaptor)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/MarsRaptor/lazy-img/issues"
+  },
+  "homepage": "https://github.com/MarsRaptor/lazy-img#readme",
+  "files": [
+    "lazy-img.js",
+    "lazy-img.module.js"
+  ]
+}
